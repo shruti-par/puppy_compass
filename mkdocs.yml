@@ -13,9 +13,9 @@ site_author: The Puppy Compass
 
 # IMPORTANT: update these two lines after you create your GitHub repo.
 # site_url is used for the search index and the social/canonical links.
-site_url: https://YOUR-USERNAME.github.io/puppy-compass/ 
-repo_url: https://github.com/YOUR-USERNAME/puppy-compass
-repo_name: puppy-compass
+site_url: https://shruti-par.github.io/puppy_compass/ 
+repo_url: https://github.com/shruti-par/puppy_compass
+repo_name: puppy_compass
 edit_uri: edit/main/docs/
 
 copyright: >-
@@ -111,7 +111,7 @@ extra:
   generator: false
   social:
     - icon: fontawesome/solid/paw
-      link: https://github.com/YOUR-USERNAME/puppy-compass
+      link: https://github.com/shruti-par/puppy_compass
       name: This guide on GitHub
 
 # ---------------------------------------------------------------------------
