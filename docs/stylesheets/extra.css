@@ -1,0 +1,177 @@
+/* ==========================================================================
+   The Puppy Compass — custom theme
+   Aesthetic: warm, calming, trustworthy. Sage/teal primary + honey accent.
+   Display: Fraunces (headings).  Body: Nunito Sans.
+   ========================================================================== */
+
+:root {
+  --pc-sage:        #3f7d6e;   /* primary  */
+  --pc-sage-deep:   #2f5d52;
+  --pc-honey:       #e0913a;   /* accent   */
+  --pc-honey-deep:  #c9781f;
+  --pc-cream:       #fbf7ef;   /* warm page background */
+  --pc-ink:         #2a2622;
+}
+
+/* ---- Material colour overrides (primary: custom / accent: custom) ------ */
+[data-md-color-primary="custom"] {
+  --md-primary-fg-color:        var(--pc-sage);
+  --md-primary-fg-color--light: #5a9a8a;
+  --md-primary-fg-color--dark:  var(--pc-sage-deep);
+  --md-primary-bg-color:        #ffffff;
+  --md-primary-bg-color--light: #ffffffcc;
+}
+[data-md-color-accent="custom"] {
+  --md-accent-fg-color:         var(--pc-honey-deep);
+  --md-accent-fg-color--transparent: #e0913a1a;
+}
+
+/* Warm the light-mode canvas a touch (default scheme only) */
+[data-md-color-scheme="default"] {
+  --md-default-bg-color: var(--pc-cream);
+  --md-typeset-a-color:  var(--pc-sage-deep);
+}
+[data-md-color-scheme="default"] .md-header,
+[data-md-color-scheme="default"] .md-tabs {
+  background-color: var(--pc-sage);
+}
+
+/* ---- Typography -------------------------------------------------------- */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-nav__title,
+.md-header__title {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.md-typeset h1 { font-weight: 700; }
+.md-typeset { font-size: 0.78rem; line-height: 1.7; }
+
+/* A little more breathing room between sections */
+.md-typeset h2 { margin-top: 2.2em; }
+
+/* ---- "Stage" pill used at the top of stage pages ----------------------- */
+.pc-stage {
+  display: inline-flex; align-items: center; gap: .4em;
+  background: var(--pc-honey); color: #4a2c05;
+  font-weight: 700; font-size: .72rem;
+  padding: .25em .85em; border-radius: 999px;
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   Shared widget shell (calculator, planner, checklists)
+   ========================================================================== */
+.pc-widget {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 16px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  margin: 1.5rem 0;
+  background:
+    radial-gradient(120% 120% at 100% 0%, #ffffff 0%, var(--pc-cream) 90%);
+  box-shadow: 0 6px 22px -16px rgba(47, 93, 82, 0.55);
+}
+[data-md-color-scheme="slate"] .pc-widget {
+  background: var(--md-code-bg-color);
+}
+.pc-widget h3 { margin-top: 0 !important; }
+
+.pc-field { margin: 0.9rem 0; }
+.pc-field label {
+  display: block; font-weight: 700; margin-bottom: .35rem;
+  font-size: .76rem;
+}
+.pc-field .pc-hint { font-weight: 400; color: var(--md-default-fg-color--light); }
+
+.pc-input,
+.pc-select {
+  width: 100%; box-sizing: border-box;
+  padding: .6rem .7rem; font-size: .82rem;
+  font-family: inherit;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 10px;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+.pc-input:focus,
+.pc-select:focus {
+  outline: none; border-color: var(--pc-sage);
+  box-shadow: 0 0 0 3px rgba(63, 125, 110, 0.2);
+}
+
+.pc-row { display: flex; gap: .8rem; flex-wrap: wrap; }
+.pc-row > .pc-field { flex: 1 1 180px; }
+
+.pc-btn {
+  appearance: none; cursor: pointer; border: none;
+  background: var(--pc-sage); color: #fff;
+  font-family: inherit; font-weight: 700; font-size: .8rem;
+  padding: .7rem 1.3rem; border-radius: 10px;
+  transition: background .15s ease, transform .05s ease;
+}
+.pc-btn:hover { background: var(--pc-sage-deep); }
+.pc-btn:active { transform: translateY(1px); }
+.pc-btn--ghost {
+  background: transparent; color: var(--pc-sage-deep);
+  border: 1px solid var(--pc-sage);
+}
+.pc-btn--ghost:hover { background: rgba(63, 125, 110, 0.08); }
+
+.pc-actions { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: .4rem; }
+
+/* ---- Result panels ----------------------------------------------------- */
+.pc-result {
+  margin-top: 1.2rem; padding: 1rem 1.1rem;
+  border-radius: 12px;
+  background: rgba(63, 125, 110, 0.06);
+  border-left: 4px solid var(--pc-sage);
+}
+.pc-result.is-empty { color: var(--md-default-fg-color--light); font-style: italic; }
+.pc-result .pc-big {
+  font-family: "Fraunces", serif; font-size: 1.6rem; font-weight: 700;
+  color: var(--pc-sage-deep); line-height: 1.2;
+}
+[data-md-color-scheme="slate"] .pc-result .pc-big { color: #7fc9b8; }
+.pc-result .pc-sub { font-size: .76rem; color: var(--md-default-fg-color--light); }
+
+.pc-disclaimer {
+  font-size: .7rem; color: var(--md-default-fg-color--light);
+  margin-top: .8rem; line-height: 1.5;
+}
+
+/* ---- Schedule / table output ------------------------------------------- */
+.pc-schedule { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: .76rem; }
+.pc-schedule th, .pc-schedule td {
+  text-align: left; padding: .5rem .6rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+.pc-schedule th { font-weight: 700; color: var(--pc-sage-deep); }
+.pc-schedule tr:hover td { background: rgba(63, 125, 110, 0.05); }
+.pc-tag {
+  display: inline-block; font-size: .66rem; font-weight: 700;
+  padding: .1em .55em; border-radius: 999px; white-space: nowrap;
+}
+.pc-tag--core  { background: #3f7d6e22; color: var(--pc-sage-deep); }
+.pc-tag--non   { background: #e0913a22; color: var(--pc-honey-deep); }
+.pc-tag--worm  { background: #6d6df022; color: #4a4ac9; }
+
+/* ---- Printable checklists ---------------------------------------------- */
+.pc-checklist { margin: 1.2rem 0; }
+.pc-checklist .pc-progress {
+  font-weight: 700; color: var(--pc-sage-deep); font-size: .78rem;
+  margin-bottom: .6rem;
+}
+.pc-checklist ul { list-style: none; padding-left: 0; }
+.pc-checklist li {
+  display: flex; align-items: flex-start; gap: .6rem;
+  padding: .4rem 0; border-bottom: 1px dashed var(--md-default-fg-color--lightest);
+}
+.pc-checklist input[type="checkbox"] { margin-top: .25rem; width: 1.05em; height: 1.05em; accent-color: var(--pc-sage); }
+.pc-checklist li.is-done span { text-decoration: line-through; opacity: .55; }
+
+@media print {
+  .md-header, .md-tabs, .md-sidebar, .md-footer, .pc-actions, .pc-btn { display: none !important; }
+  .pc-widget { box-shadow: none; border: 1px solid #ccc; }
+}

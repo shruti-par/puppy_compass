@@ -1,0 +1,161 @@
+# ---------------------------------------------------------------------------
+# The Puppy Compass — MkDocs configuration
+# Build:   mkdocs serve        (local preview at http://127.0.0.1:8000)
+#          mkdocs build        (static site -> ./site)
+# Deploy:  handled automatically by .github/workflows/deploy.yml on push
+# ---------------------------------------------------------------------------
+
+site_name: The Puppy Compass
+site_description: >-
+  A calm, mentor-style guide for bringing a puppy home — written to be read in
+  order, from the day you decide to get a puppy through their first birthday.
+site_author: The Puppy Compass
+
+# IMPORTANT: update these two lines after you create your GitHub repo.
+# site_url is used for the search index and the social/canonical links.
+site_url: https://YOUR-USERNAME.github.io/puppy-compass/ 
+repo_url: https://github.com/YOUR-USERNAME/puppy-compass
+repo_name: puppy-compass
+edit_uri: edit/main/docs/
+
+copyright: >-
+  Educational content only — not a substitute for advice from your own
+  veterinarian. Always confirm medical decisions with a licensed vet.
+
+theme:
+  name: material
+  language: en
+  custom_dir: docs/overrides
+  font:
+    text: Nunito Sans
+    code: JetBrains Mono
+  icon:
+    logo: material/compass-rose
+    repo: fontawesome/brands/github
+  favicon: assets/favicon.png
+  features:
+    - navigation.instant        # SPA-style fast loads
+    - navigation.instant.progress
+    - navigation.tracking       # URL updates with the active anchor
+    - navigation.tabs           # top-level sections as tabs
+    - navigation.tabs.sticky
+    - navigation.sections       # group headers in the sidebar
+    - navigation.top            # back-to-top button
+    - navigation.indexes        # section landing pages
+    - navigation.footer         # prev/next links
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.tabs.link
+    - content.tooltips
+    - content.code.copy
+  palette:
+    # Light mode — warm, calming, trustworthy
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/tools.js
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      title: On this page
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.keys
+  - pymdownx.smartsymbols
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+
+plugins:
+  - search
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/solid/paw
+      link: https://github.com/YOUR-USERNAME/puppy-compass
+      name: This guide on GitHub
+
+# ---------------------------------------------------------------------------
+# Navigation — deliberately ordered by the puppy's life stage.
+# Read top to bottom and you are reading the journey in order.
+# ---------------------------------------------------------------------------
+nav:
+  - Start Here:
+      - index.md
+      - How to use this guide: 00-start/how-to-use.md
+      - Emergency quick reference: 00-start/emergency-card.md
+  - Before Home:
+      - 01-before-home/index.md
+      - Puppy-proofing your home: 01-before-home/puppy-proofing.md
+      - The essentials shopping list: 01-before-home/essentials.md
+      - Choosing a vet: 01-before-home/choosing-a-vet.md
+  - First Weeks:
+      - 02-first-weeks/index.md
+      - The first 72 hours: 02-first-weeks/first-72-hours.md
+      - Good vs. bad — foods & hazards: 02-first-weeks/good-and-bad.md
+      - Feeding — how much & what: 02-first-weeks/feeding.md
+      - The first vet visit: 02-first-weeks/first-vet-visit.md
+      - Vaccines & deworming: 02-first-weeks/vaccines.md
+      - Potty training: 02-first-weeks/potty-training.md
+      - Crate training: 02-first-weeks/crate-training.md
+  - Foundations:
+      - 03-foundations/index.md
+      - Socializing safely: 03-foundations/socialization.md
+      - Training the basics: 03-foundations/training.md
+      - Daily grooming & hygiene: 03-foundations/grooming.md
+  - Growing Up:
+      - 04-growing-up/index.md
+      - Growth stages: 04-growing-up/growth-stages.md
+      - Surviving adolescence: 04-growing-up/adolescence.md
+      - Spay & neuter timing: 04-growing-up/spay-neuter.md
+  - Health & Safety:
+      - 05-health/index.md
+      - Is this normal? Spotting illness: 05-health/spotting-illness.md
+      - Emergencies — what to do: 05-health/emergencies.md
+      - Parasites & prevention: 05-health/parasites.md
+  - Tools & Checklists:
+      - 06-tools/index.md
+      - Feeding calculator: 06-tools/feeding-calculator.md
+      - Vaccine & deworming planner: 06-tools/vaccine-planner.md
+      - Printable checklists: 06-tools/checklists.md
+      - Glossary: 06-tools/glossary.md
+      - Sources & further reading: 06-tools/sources.md
