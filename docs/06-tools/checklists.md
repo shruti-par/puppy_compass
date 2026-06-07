@@ -67,8 +67,10 @@ Tick these off on screen (your progress shows at the top of each), or use your b
 </ul>
 </div>
 
-!!! tip "Printing tip"
-    Use your browser's **Print** (Ctrl/Cmd + P). The header, sidebar, and
-    buttons are hidden in print, so you get a clean checklist. Checkbox states
-    reset when you reload the page — print before closing if you've ticked
-    things off.
+!!! tip "Saved on your device + printing"
+    Your ticks are **saved automatically in this browser**, so you can close
+    the tab and come back later to find the list where you left off. It's
+    per-device and private — nothing is shared with other people viewing the
+    same page. Use **Reset this list** to clear one, or your browser's
+    **Print** (Ctrl/Cmd + P) for a clean paper copy (the header, sidebar, and
+    buttons are hidden in print).

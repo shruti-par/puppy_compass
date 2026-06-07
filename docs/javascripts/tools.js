@@ -189,23 +189,88 @@
   }
 
   /* ======================================================================
-     TOOL 3 — Checklist progress (persists only in-memory for the session)
+     TOOL 3 — Checklist progress
+     Saved per-device in localStorage so ticks survive reloads and revisits.
+     Keys are derived from the page path + item text, so they stay stable even
+     if the list is reordered or items are added/removed later. Storage is
+     private to each browser — nothing is shared between visitors.
      ====================================================================== */
+  function safeStorage() {
+    // localStorage can throw in private mode or when disabled — degrade gracefully.
+    try {
+      const k = "__pc_test__";
+      window.localStorage.setItem(k, "1");
+      window.localStorage.removeItem(k);
+      return window.localStorage;
+    } catch (e) {
+      return null;
+    }
+  }
+
   function initChecklists() {
+    const store = safeStorage();
+    const pagePath = (location.pathname || "/").replace(/\/+$/, "") || "/";
+
     document.querySelectorAll(".pc-checklist").forEach((list) => {
       if (list.dataset.ready) return;
       list.dataset.ready = "1";
+
       const prog = list.querySelector(".pc-progress");
-      const boxes = list.querySelectorAll('input[type="checkbox"]');
+      const boxes = Array.prototype.slice.call(
+        list.querySelectorAll('input[type="checkbox"]')
+      );
+
+      // Build a stable, collision-resistant storage key for each item.
+      const seen = {};
+      const keys = boxes.map((b) => {
+        const li = b.closest("li");
+        const text = ((li && li.textContent) || "").trim().toLowerCase();
+        let slug =
+          text.replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "").slice(0, 60) || "item";
+        seen[slug] = (seen[slug] || 0) + 1;
+        if (seen[slug] > 1) slug += "-" + seen[slug]; // de-dupe identical lines
+        return "pccl:" + pagePath + ":" + slug;
+      });
+
+      // Restore previously saved ticks.
+      if (store) {
+        boxes.forEach((b, i) => {
+          try {
+            if (store.getItem(keys[i]) === "1") b.checked = true;
+          } catch (e) {}
+        });
+      }
+
       function update() {
         let done = 0;
-        boxes.forEach((b) => {
+        boxes.forEach((b, i) => {
           b.closest("li").classList.toggle("is-done", b.checked);
           if (b.checked) done++;
+          if (store) {
+            try {
+              if (b.checked) store.setItem(keys[i], "1");
+              else store.removeItem(keys[i]);
+            } catch (e) {}
+          }
         });
-        if (prog) prog.textContent = done + " of " + boxes.length + " packed ✓";
+        if (prog) prog.textContent = done + " of " + boxes.length + " done ✓";
       }
+
       boxes.forEach((b) => b.addEventListener("change", update));
+
+      // Add a reset control (only meaningful when state is being saved).
+      if (store && boxes.length && !list.querySelector(".pc-checklist-reset")) {
+        const reset = document.createElement("button");
+        reset.type = "button";
+        reset.className = "pc-btn pc-btn--ghost pc-checklist-reset";
+        reset.textContent = "Reset this list";
+        reset.addEventListener("click", function () {
+          boxes.forEach((b) => (b.checked = false));
+          update();
+        });
+        list.appendChild(reset);
+      }
+
       update();
     });
   }

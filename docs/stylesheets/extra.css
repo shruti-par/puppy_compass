@@ -170,6 +170,10 @@
 }
 .pc-checklist input[type="checkbox"] { margin-top: .25rem; width: 1.05em; height: 1.05em; accent-color: var(--pc-sage); }
 .pc-checklist li.is-done span { text-decoration: line-through; opacity: .55; }
+.pc-checklist-reset {
+  margin-top: 1rem; font-size: .72rem;
+  padding: .4rem .9rem; border-radius: 8px;
+}
 
 @media print {
   .md-header, .md-tabs, .md-sidebar, .md-footer, .pc-actions, .pc-btn { display: none !important; }
